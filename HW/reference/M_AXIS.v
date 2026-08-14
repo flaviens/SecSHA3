@@ -354,8 +354,8 @@
     //axis_tvalid is asserted when the control state machine's state is SEND_STREAM and
     //number of output streaming data is less than the NUMBER_OF_OUTPUT_WORDS.                        
     assign axis_tvalid = ((mst_exec_state == SEND_STREAM) && (read_pointer < NUMBER_OF_OUTPUT_WORDS));
-    assign axis_tlast = (read_pointer == NUMBER_OF_OUTPUT_WORDS - 1'b1)&& tx_en;  
-    assign tx_done = axis_tlast;
+    assign axis_tlast = (read_pointer == NUMBER_OF_OUTPUT_WORDS - 1'b1);
+    assign tx_done = axis_tlast && tx_en;
 
     //FIFO read enable generation
     assign tx_en = M_AXIS_TREADY && axis_tvalid;  
